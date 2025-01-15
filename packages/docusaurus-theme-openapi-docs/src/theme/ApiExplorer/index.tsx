@@ -14,19 +14,19 @@ import Response from "@theme/ApiExplorer/Response";
 import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
 import { ApiItem } from "docusaurus-plugin-openapi-docs/src/types";
 import sdk from "postman-collection";
-import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import SkeletonLoader from "@theme/SkeletonLoader";
 
 function ApiExplorer({
   item,
   infoPath,
+  hideRightPanel,
 }: {
   item: NonNullable<ApiItem>;
   infoPath: string;
+  hideRightPanel?: boolean;
 }) {
   const postman = new sdk.Request(item.postman);
-  const metadata = useDoc();
-  const hideRightPanel = metadata.frontMatter.hide_right_panel;
+
   return (
     <>
       {!hideRightPanel && (

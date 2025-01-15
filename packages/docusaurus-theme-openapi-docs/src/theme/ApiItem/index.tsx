@@ -32,7 +32,11 @@ import { Provider } from "react-redux";
 import { createStoreWithoutState, createStoreWithState } from "./store";
 import MDXComponentContainer from "./MDXComponentContainer";
 
-let ApiExplorer = (_: { item: any; infoPath: any }) => <div />;
+let ApiExplorer = (_: {
+  item: any;
+  infoPath: any;
+  hideRightPanel?: boolean;
+}) => <div />;
 
 if (ExecutionEnvironment.canUseDOM) {
   ApiExplorer = require("@theme/ApiExplorer").default;
@@ -145,6 +149,7 @@ export default function ApiItem(props: Props): JSX.Element {
     );
   }
 
+  const hideRightPanel = props.content.metadata.frontMatter.hide_right_panel;
   if (api) {
     return (
       <DocProvider content={props.content}>
@@ -153,8 +158,15 @@ export default function ApiItem(props: Props): JSX.Element {
           <DocItemLayout>
             <Provider store={store2}>
               <div className={clsx("row", "theme-api-markdown")}>
-                <MDXComponentContainer MDXComponent={MDXComponent} />
-                <ApiExplorer item={api} infoPath={infoPath} />
+                <MDXComponentContainer
+                  MDXComponent={MDXComponent}
+                  hideRightPanel={hideRightPanel as boolean | undefined}
+                />
+                <ApiExplorer
+                  item={api}
+                  infoPath={infoPath}
+                  hideRightPanel={hideRightPanel as boolean | undefined}
+                />
               </div>
             </Provider>
           </DocItemLayout>
