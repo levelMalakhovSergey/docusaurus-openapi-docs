@@ -37,6 +37,7 @@ export interface APIOptions {
   template?: string;
   downloadUrl?: string;
   hideSendButton?: boolean;
+  hideRightPanel?: boolean;
   showExtensions?: boolean;
   sidebarOptions?: SidebarOptions;
   version?: string;
