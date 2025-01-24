@@ -9,8 +9,8 @@ import zlib from "zlib";
 
 import React from "react";
 
-import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import { DocProvider } from "@docusaurus/plugin-content-docs/client";
 import { HtmlClassNameProvider } from "@docusaurus/theme-common";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -20,6 +20,7 @@ import { createPersistanceMiddleware } from "@theme/ApiExplorer/persistanceMiddl
 import DocItemLayout from "@theme/ApiItem/Layout";
 import type { Props } from "@theme/DocItem";
 import DocItemMetadata from "@theme/DocItem/Metadata";
+import SkeletonLoader from "@theme/SkeletonLoader";
 import clsx from "clsx";
 import { ServerObject } from "docusaurus-plugin-openapi-docs/src/openapi/types";
 import { ParameterObject } from "docusaurus-plugin-openapi-docs/src/openapi/types";
@@ -31,13 +32,8 @@ import type {
 import { Provider } from "react-redux";
 
 import { createStoreWithoutState, createStoreWithState } from "./store";
-import SkeletonLoader from "@theme/SkeletonLoader";
 
-let ApiExplorer = (_: {
-  item: any;
-  infoPath: any;
-  hideRightPanel?: boolean;
-}) => <div />;
+let ApiExplorer = (_: { item: any; infoPath: any }) => <div />;
 
 if (ExecutionEnvironment.canUseDOM) {
   ApiExplorer = require("@theme/ApiExplorer").default;
