@@ -246,6 +246,9 @@ function createItems(
           ...(options?.hideSendButton && {
             hide_send_button: options.hideSendButton,
           }),
+          ...(options?.hideRightPanel && {
+            hide_right_panel: options.hideRightPanel,
+          }),
           ...(options?.showExtensions && {
             show_extensions: options.showExtensions,
           }),
@@ -389,6 +392,9 @@ function createItems(
           ...(options?.proxy && { proxy: options.proxy }),
           ...(options?.hideSendButton && {
             hide_send_button: options.hideSendButton,
+          }),
+          ...(options?.hideRightPanel && {
+            hide_right_panel: options.hideRightPanel,
           }),
           ...(options?.showExtensions && {
             show_extensions: options.showExtensions,

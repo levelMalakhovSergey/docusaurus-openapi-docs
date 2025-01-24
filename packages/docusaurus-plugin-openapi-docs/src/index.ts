@@ -228,6 +228,9 @@ proxy: {{{frontMatter.proxy}}}
 {{#frontMatter.hide_send_button}}
 hide_send_button: true
 {{/frontMatter.hide_send_button}}
+{{#frontMatter.hide_right_panel}}
+hide_right_panel: true
+{{/frontMatter.hide_right_panel}}
 {{#frontMatter.show_extensions}}
 show_extensions: true
 {{/frontMatter.show_extensions}}

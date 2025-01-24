@@ -41,6 +41,7 @@ export const OptionsSchema = Joi.object({
         template: Joi.string(),
         downloadUrl: Joi.string(),
         hideSendButton: Joi.boolean(),
+        hideRightPanel: Joi.boolean(),
         showExtensions: Joi.boolean(),
         sidebarOptions: sidebarOptions,
         markdownGenerators: markdownGenerators,

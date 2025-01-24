@@ -9,7 +9,6 @@ import zlib from "zlib";
 
 import React from "react";
 
-import BrowserOnly from "@docusaurus/BrowserOnly";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import { DocProvider } from "@docusaurus/plugin-content-docs/client";
 import { HtmlClassNameProvider } from "@docusaurus/theme-common";
@@ -18,10 +17,8 @@ import useIsBrowser from "@docusaurus/useIsBrowser";
 import { createAuth } from "@theme/ApiExplorer/Authorization/slice";
 import { createPersistanceMiddleware } from "@theme/ApiExplorer/persistanceMiddleware";
 import DocItemLayout from "@theme/ApiItem/Layout";
-import CodeBlock from "@theme/CodeBlock";
 import type { Props } from "@theme/DocItem";
 import DocItemMetadata from "@theme/DocItem/Metadata";
-import SkeletonLoader from "@theme/SkeletonLoader";
 import clsx from "clsx";
 import { ServerObject } from "docusaurus-plugin-openapi-docs/src/openapi/types";
 import { ParameterObject } from "docusaurus-plugin-openapi-docs/src/openapi/types";
@@ -33,6 +30,7 @@ import type {
 import { Provider } from "react-redux";
 
 import { createStoreWithoutState, createStoreWithState } from "./store";
+import MDXComponentContainer from "./MDXComponentContainer";
 
 let ApiExplorer = (_: { item: any; infoPath: any }) => <div />;
 
@@ -155,16 +153,8 @@ export default function ApiItem(props: Props): JSX.Element {
           <DocItemLayout>
             <Provider store={store2}>
               <div className={clsx("row", "theme-api-markdown")}>
-                <div className="col col--7 openapi-left-panel__container">
-                  <MDXComponent />
-                </div>
-                <div className="col col--5 openapi-right-panel__container">
-                  <BrowserOnly fallback={<SkeletonLoader size="lg" />}>
-                    {() => {
-                      return <ApiExplorer item={api} infoPath={infoPath} />;
-                    }}
-                  </BrowserOnly>
-                </div>
+                <MDXComponentContainer MDXComponent={MDXComponent} />
+                <ApiExplorer item={api} infoPath={infoPath} />
               </div>
             </Provider>
           </DocItemLayout>
@@ -178,14 +168,8 @@ export default function ApiItem(props: Props): JSX.Element {
           <DocItemMetadata />
           <DocItemLayout>
             <div className={clsx("row", "theme-api-markdown")}>
-              <div className="col col--7 openapi-left-panel__container schema">
-                <MDXComponent />
-              </div>
-              <div className="col col--5 openapi-right-panel__container">
-                <CodeBlock language="json" title={`${frontMatter.title}`}>
-                  {JSON.stringify(sample, null, 2)}
-                </CodeBlock>
-              </div>
+              <MDXComponentContainer MDXComponent={MDXComponent} />
+              <ApiExplorer item={api} infoPath={infoPath} />
             </div>
           </DocItemLayout>
         </HtmlClassNameProvider>
