@@ -297,10 +297,11 @@ const config: Config = {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
             },
-            template: "api.mustache", // Customize API MDX with mustache template
+            template: "api.mustache",
             downloadUrl: "/petstore.yaml",
             hideSendButton: false,
             showSchemas: true,
+            hideRightPanel: true,
           } satisfies OpenApiPlugin.Options,
           petstore31: {
             specPath: "examples/petstore-3.1.yaml",
@@ -310,6 +311,7 @@ const config: Config = {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",
             },
+
             downloadUrl: "/petstore-3.1.yaml",
             hideSendButton: false,
             showSchemas: true,
@@ -336,6 +338,7 @@ const config: Config = {
             sidebarOptions: {
               groupPathsBy: "tagGroup",
             },
+            hideRightPanel: true,
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           tests: {
@@ -345,6 +348,7 @@ const config: Config = {
               groupPathsBy: "tag",
               categoryLinkSource: "info",
             },
+            hideRightPanel: true,
             hideSendButton: true,
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,

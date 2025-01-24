@@ -19,37 +19,23 @@ import SkeletonLoader from "@theme/SkeletonLoader";
 function ApiExplorer({
   item,
   infoPath,
-  hideRightPanel,
 }: {
   item: NonNullable<ApiItem>;
   infoPath: string;
-  hideRightPanel?: boolean;
 }) {
   const postman = new sdk.Request(item.postman);
 
   return (
     <>
-      {!hideRightPanel && (
-        <div className="col col--5 openapi-right-panel__container">
-          <BrowserOnly fallback={<SkeletonLoader size="lg" />}>
-            {() => {
-              return (
-                <>
-                  <SecuritySchemes infoPath={infoPath} />
-                  {item.method !== "event" && (
-                    <CodeSnippets
-                      postman={postman}
-                      codeSamples={(item as any)["x-codeSamples"] ?? []}
-                    />
-                  )}
-                  <Request item={item} />
-                  <Response item={item} />
-                </>
-              );
-            }}
-          </BrowserOnly>
-        </div>
+      <SecuritySchemes infoPath={infoPath} />
+      {item.method !== "event" && (
+        <CodeSnippets
+          postman={postman}
+          codeSamples={(item as any)["x-codeSamples"] ?? []}
+        />
       )}
+      <Request item={item} />
+      <Response item={item} />
     </>
   );
 }

@@ -10,6 +10,7 @@ import zlib from "zlib";
 import React from "react";
 
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import { DocProvider } from "@docusaurus/plugin-content-docs/client";
 import { HtmlClassNameProvider } from "@docusaurus/theme-common";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -30,7 +31,7 @@ import type {
 import { Provider } from "react-redux";
 
 import { createStoreWithoutState, createStoreWithState } from "./store";
-import MDXComponentContainer from "./MDXComponentContainer";
+import SkeletonLoader from "@theme/SkeletonLoader";
 
 let ApiExplorer = (_: {
   item: any;
@@ -158,15 +159,20 @@ export default function ApiItem(props: Props): JSX.Element {
           <DocItemLayout>
             <Provider store={store2}>
               <div className={clsx("row", "theme-api-markdown")}>
-                <MDXComponentContainer
-                  MDXComponent={MDXComponent}
-                  hideRightPanel={hideRightPanel as boolean | undefined}
-                />
-                <ApiExplorer
-                  item={api}
-                  infoPath={infoPath}
-                  hideRightPanel={hideRightPanel as boolean | undefined}
-                />
+                <div
+                  className={`col col--${hideRightPanel ? 12 : 7} openapi-left-panel__container`}
+                >
+                  <MDXComponent />
+                </div>
+                {!hideRightPanel && (
+                  <div className="col col--5 openapi-right-panel__container">
+                    <BrowserOnly fallback={<SkeletonLoader size="lg" />}>
+                      {() => {
+                        return <ApiExplorer item={api} infoPath={infoPath} />;
+                      }}
+                    </BrowserOnly>
+                  </div>
+                )}
               </div>
             </Provider>
           </DocItemLayout>
@@ -180,8 +186,20 @@ export default function ApiItem(props: Props): JSX.Element {
           <DocItemMetadata />
           <DocItemLayout>
             <div className={clsx("row", "theme-api-markdown")}>
-              <MDXComponentContainer MDXComponent={MDXComponent} />
-              <ApiExplorer item={api} infoPath={infoPath} />
+              <div
+                className={`col col--${hideRightPanel ? 12 : 7} openapi-left-panel__container`}
+              >
+                <MDXComponent />
+              </div>
+              {!hideRightPanel && (
+                <div className="col col--5 openapi-right-panel__container">
+                  <BrowserOnly fallback={<SkeletonLoader size="lg" />}>
+                    {() => {
+                      return <ApiExplorer item={api} infoPath={infoPath} />;
+                    }}
+                  </BrowserOnly>
+                </div>
+              )}
             </div>
           </DocItemLayout>
         </HtmlClassNameProvider>
