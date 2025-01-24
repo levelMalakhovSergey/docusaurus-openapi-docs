@@ -301,7 +301,6 @@ const config: Config = {
             downloadUrl: "/petstore.yaml",
             hideSendButton: false,
             showSchemas: true,
-            hideRightPanel: true,
           } satisfies OpenApiPlugin.Options,
           petstore31: {
             specPath: "examples/petstore-3.1.yaml",
@@ -315,6 +314,7 @@ const config: Config = {
             downloadUrl: "/petstore-3.1.yaml",
             hideSendButton: false,
             showSchemas: true,
+            hideRightPanel: true,
             markdownGenerators: { createApiPageMD: myCustomApiMdGenerator }, // customize MDX with markdown generator
           } satisfies OpenApiPlugin.Options,
           cos: {
@@ -338,7 +338,6 @@ const config: Config = {
             sidebarOptions: {
               groupPathsBy: "tagGroup",
             },
-            hideRightPanel: true,
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
           tests: {
@@ -348,7 +347,6 @@ const config: Config = {
               groupPathsBy: "tag",
               categoryLinkSource: "info",
             },
-            hideRightPanel: true,
             hideSendButton: true,
             showSchemas: true,
           } satisfies OpenApiPlugin.Options,
